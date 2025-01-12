@@ -82,3 +82,81 @@ curl -X POST http://localhost:3000/users/register \
   }
 }
 ```
+
+# User Login Endpoint
+
+## POST /users/login
+
+### Description
+This endpoint allows users to log in to the application.
+
+### Request Body
+The request body should be a JSON object with the following structure:
+```json
+{
+  "email": "string (required, valid email format)",
+  "password": "string (required, min 6 characters)"
+}
+```
+
+### Responses
+
+#### Success
+- **Status Code:** 200 OK
+- **Response Body:**
+  ```json
+  {
+    "token": "string (JWT token)",
+    "user": {
+      "_id": "string",
+      "email": "string",
+      "name": "string"
+    }
+  }
+  ```
+
+#### Validation Errors
+- **Status Code:** 400 Bad Request
+- **Response Body:**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "string (error message)",
+        "param": "string (parameter name)",
+        "location": "string (location of the parameter)"
+      }
+    ]
+  }
+  ```
+
+#### Authentication Errors
+- **Status Code:** 401 Unauthorized
+- **Response Body:**
+  ```json
+  {
+    "message": "Invalid email or password"
+  }
+  ```
+
+### Example Request
+```bash
+curl -X POST http://localhost:3000/users/login \
+-H "Content-Type: application/json" \
+-d '{
+  "email": "john.doe@example.com",
+  "password": "password123"
+}'
+```
+
+### Example Response
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "email": "john.doe@example.com",
+    "name": "John Doe"
+  }
+}
+```
