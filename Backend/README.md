@@ -160,3 +160,114 @@ curl -X POST http://localhost:3000/users/login \
   }
 }
 ```
+
+# Captain Registration Endpoint
+
+## POST /captains/register
+
+### Description
+This endpoint is used to register a new captain. It validates the input data, hashes the password, and creates a new captain in the database.
+
+### Request Body
+The request body should be a JSON object with the following structure:
+```json
+{
+  "fullname": {
+    "firstname": "string (required, min 3 characters)",
+    "lastname": "string (optional, min 3 characters)"
+  },
+  "email": "string (required, valid email format)",
+  "password": "string (required, min 6 characters)",
+  "vehicle": {
+    "color": "string (required, min 3 characters)",
+    "plate": "string (required, min 3 characters)",
+    "capacity": "number (required, min 1)",
+    "vehicleType": "string (required, one of 'car', 'motorcycle', 'auto')"
+  }
+}
+```
+
+### Responses
+
+#### Success
+- **Status Code:** 201 Created
+- **Response Body:**
+  ```json
+  {
+    "token": "string (JWT token)",
+    "captain": {
+      "_id": "string",
+      "fullname": {
+        "firstname": "string",
+        "lastname": "string"
+      },
+      "email": "string",
+      "vehicle": {
+        "color": "string",
+        "plate": "string",
+        "capacity": "number",
+        "vehicleType": "string"
+      },
+      "socketId": "string (optional)",
+      "status": "string (one of 'active', 'inactive')"
+    }
+  }
+  ```
+
+#### Validation Errors
+- **Status Code:** 400 Bad Request
+- **Response Body:**
+  ```json
+  {
+    "errors": [
+      {
+        "msg": "string (error message)",
+        "param": "string (parameter name)",
+        "location": "string (location of the parameter)"
+      }
+    ]
+  }
+  ```
+
+### Example Request
+```bash
+curl -X POST http://localhost:3000/captains/register \
+-H "Content-Type: application/json" \
+-d '{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "vehicle": {
+    "color": "Red",
+    "plate": "XYZ 1234",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}'
+```
+
+### Example Response
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "captain": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "vehicle": {
+      "color": "Red",
+      "plate": "XYZ 1234",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "socketId": null,
+    "status": "inactive"
+  }
+}
+```
