@@ -63,7 +63,7 @@ const CaptainLogin = () => {
             New here ?
             <Link to="/captain-signup" className="text-blue-600">
               {" "}
-              Register as a captain
+              Signup as a captain
             </Link>
           </p>
         </div>

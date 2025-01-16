@@ -6,7 +6,7 @@ const UserSignup = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState({});
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -16,8 +16,10 @@ const UserSignup = () => {
     setLastName("");
 
     setUserData({
-      firstName:firstName,
-      lastName:lastName,
+      username: {
+        firstName: firstName,
+        lastName: lastName,
+      },
       email: email,
       password: password,
     });
@@ -44,7 +46,9 @@ const UserSignup = () => {
               required
               type="text"
               value={firstName}
-              onChange={(e)=>{setFirstName(e.target.value)}}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+              }}
               placeholder="First name"
               className="bg-[#eeeeee] rounded px-4 py-2  border w-1/2  text-base placeholder:text-sm"
             />
@@ -52,7 +56,9 @@ const UserSignup = () => {
               required
               type="text"
               value={lastName}
-              onChange={(e)=>{setLastName(e.target.value)}}
+              onChange={(e) => {
+                setLastName(e.target.value);
+              }}
               placeholder="Last name"
               className="bg-[#eeeeee] rounded px-4 py-2  border w-1/2 text-base placeholder:text-sm"
             />
@@ -63,7 +69,9 @@ const UserSignup = () => {
             required
             type="email"
             value={email}
-            onChange={(e)=>{setEmail(e.target.value)}}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
             placeholder="email@example.com"
             className="bg-[#eeeeee] rounded px-4 py-2 mb-7 border w-full text-base placeholder:text-sm"
           />
@@ -74,7 +82,9 @@ const UserSignup = () => {
             type="password"
             placeholder="password"
             value={password}
-            onChange={(e)=>{setPassword(e.target.value)}}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
             className="bg-[#eeeeee] rounded px-4 py-2 mb-7 border w-full text-lg placeholder:text-base"
           />
 
