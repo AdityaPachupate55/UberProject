@@ -16,9 +16,9 @@ const CaptainSignup = () => {
       setLastName("");
   
       setcaptainData({
-        fullName: {
-          firstName: firstName,
-          lastName: lastName,
+        fullname: {
+          firstname: firstName,
+          lastname: lastName,
         },
         email: email,
         password: password,
